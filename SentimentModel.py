@@ -1,14 +1,11 @@
 import numpy as np
 import pandas as pd
-import nltk
-import matplotlib.pyplot as plt
-import seaborn as sns
+import pickle
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import GridSearchCV
 
@@ -64,6 +61,10 @@ class SentimentModel:
         prediction = self.log_reg.predict(self.X_test)
         return prediction
 
+    def predict(self, x: list):
+        prediction = self.log_reg.predict(self.vectorizer.transform(x))
+        return prediction
+
 
 def clean(df):
     df['Airline'] = df['text'].apply(lambda x: x.split(" ")[0].replace("@", ""))
@@ -81,9 +82,9 @@ if __name__ == '__main__':
     model.split(0.3)
     model.vectorize(ngram_range=(1, 2))
     model.fit()
-    print(model.df.head())
-    print(model.predict())
+    print(model.predict(['The flight was great']))
     print("Testing Accuracy: ", model.log_reg.score(model.X_test, model.y_test))
-    phrase = input('Give example review:')
-    print("Result " + str(model.log_reg.predict(
-        model.vectorizer.transform([phrase]))))
+
+    pkl_filename = "model/airline_model.pkl"
+    with open(pkl_filename, 'wb') as file:
+        pickle.dump(model.log_reg, file)
