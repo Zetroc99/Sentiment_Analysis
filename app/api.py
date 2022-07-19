@@ -1,4 +1,5 @@
 import pickle
+import SentimentModel
 
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -7,7 +8,7 @@ from pydantic import BaseModel
 api = FastAPI()
 
 # Load logistic regression model
-pkl_filename = './model/airline_model.pkl'
+pkl_filename = '../model/airline_model.pkl'
 with open(pkl_filename, 'rb') as file:
     lr_model = pickle.load(file)
 
@@ -17,6 +18,7 @@ class Airline(BaseModel):
     text: str
 
 
+# Test endpoint
 @api.get('/')
 def root():
     return {'message': 'Hello!'}
