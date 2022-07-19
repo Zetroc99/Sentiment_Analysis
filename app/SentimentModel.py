@@ -7,15 +7,6 @@ from sklearn.preprocessing import LabelBinarizer
 from sklearn.model_selection import GridSearchCV
 
 
-# TODO use OOP concepts to train model
-# TODO: use OOP concepts to read data for training
-# TODO: implement inference class using fastAPI and Swagger
-# TODO: implement API server on python using fastAPI
-# TODO: API must accept an english text and respond wit the predicted sentiment
-# TODO: integrate Swagger documentation for the Rest API endpoint
-# TODO: (BONUS) containerize the model and expose a public endpoint for your API
-#       using Cortex or HuggingFace
-
 class SentimentModel:
 
     def __init__(self, data_file="./data/airline_sentiment_analysis.csv",
