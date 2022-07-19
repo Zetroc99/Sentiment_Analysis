@@ -1,7 +1,6 @@
 import pickle
-import SentimentModel
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from pydantic import BaseModel
 
 # Initialize API

@@ -20,7 +20,7 @@ from sklearn.model_selection import GridSearchCV
 
 class SentimentModel:
 
-    def __init__(self, data_file="data/airline_sentiment_analysis.csv",
+    def __init__(self, data_file="./data/airline_sentiment_analysis.csv",
                  index_col=None, param_grid=None):
         self.df = pd.read_csv(data_file, index_col=index_col)
         if param_grid is None:

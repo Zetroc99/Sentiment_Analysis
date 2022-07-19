@@ -14,6 +14,6 @@ def main():
     model.vectorize(ngram_range=(1, 2))
     model.fit()
 
-    pkl_filename = "model/airline_model.pkl"
+    pkl_filename = "../model/airline_model.pkl"
     with open(pkl_filename, 'wb') as file:
         pickle.dump(model, file)
